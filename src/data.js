@@ -47,6 +47,6 @@ export const site = {
     ],
 
     // Swap in your own profile links
-    github: 'https://github.com/',
-    linkedin: 'https://www.linkedin.com/',
+    github: 'https://github.com/gtprodlmax34',
+    linkedin: 'https://www.linkedin.com/in/%C5%BEygimantas-poderis-a06853329/',
 };
