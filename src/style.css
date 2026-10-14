@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+    --color-bg: #0b0708;
+    --color-panel: #140c0e;
+    --color-line: #2a1619;
+    --color-ink: #efe6e3;
+    --color-muted: #a08f8c;
+    --color-red: #9e1b25;
+    --color-red-bright: #d23a44;
+    --font-sans: "Inter", system-ui, sans-serif;
+}
+
+::selection { background: var(--color-red); color: #fff; }
+
+/* Slow drifting red glow behind everything */
+.blobs { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
+.blobs span {
+    position: absolute;
+    width: 46vmax;
+    height: 46vmax;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: .3;
+    animation: drift 26s ease-in-out infinite alternate;
+}
+.blobs span:nth-child(1) { background: #5c0f16; top: -18vmax; left: -10vmax; }
+.blobs span:nth-child(2) { background: var(--color-red); top: 30vh; right: -22vmax; opacity: .14; animation-duration: 32s; }
+.blobs span:nth-child(3) { background: #3a0a10; bottom: -24vmax; left: 20vw; animation-duration: 38s; }
+@keyframes drift { to { transform: translate(8vmax, 6vmax) scale(1.12); } }
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .blobs span { animation: none; }
+}
