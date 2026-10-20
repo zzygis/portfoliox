@@ -43,7 +43,7 @@ export const site = {
     projects: [
         { title: 'besha.bg', icon: '/img/besha.svg', tech: ['PHP', 'Twig', 'Tailwind', 'Docker'], description: 'Besha yra laikrodžių įmonės svetainė. Sukurta praktikos metu įmonėje ThinkWeb, Bulgarijoje, naudojant įmonės ThinkCMS sistemą.', url: 'https://www.besha.bg/' },
         { title: 'chativly.xyz', icon: '/img/chativly.png', tech: ['HTML', 'CSS', 'JavaScript', 'PHP', 'Netlify', 'Claude API'], description: 'Chativly kuria svetaines vietiniam verslui Lietuvoje ir prie jų gali pridėti DI chatbotą, kuris atsako klientams 24/7.', url: 'https://chativly.xyz/', repo: 'https://github.com/gtprodlmax34/chativly' },
-        { title: 'Valorant LFG botas', tech: ['Python', 'PyAutoGUI', 'Windows OCR', 'Tkinter'], description: 'Programa, kuri skaito Discord langą ir automatiškai paspaudžia LFG mygtukus keliuose kanaluose. GUI kuriama dabar.', url: '', repo: 'https://github.com/gtprodlmax34/Bot-for-val-discord' },
+        { title: 'Valorant LFG botas', tech: ['Python', 'PyAutoGUI','Tkinter'], description: 'Programa, kuri skaito Discord langą ir automatiškai paspaudžia LFG mygtukus keliuose kanaluose. GUI kuriama dabar.', url: '', repo: 'https://github.com/gtprodlmax34/Bot-for-val-discord' },
     ],
 
     // Swap in your own profile links
