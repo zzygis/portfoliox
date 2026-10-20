@@ -1,6 +1,7 @@
 import './style.css';
 import { site } from './data.js';
 import { initCursor } from './cursor.js';
+import { initDots } from './dots.js';
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => (
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
@@ -34,35 +35,46 @@ const socials = () => [['github', 'GitHub'], ['linkedin', 'LinkedIn']]
     .join('');
 
 const panel = 'relative min-h-svh snap-start px-5 sm:px-10 pt-24 pb-12 flex flex-col';
-const navLink = 'text-muted hover:text-ink border-b border-transparent hover:border-red-bright py-1 transition-colors';
+const navLink = (href, label) => `<a href="${href}" class="pill" data-nav>
+    <span data-dot hidden class="relative z-[1] mr-1.5 size-1.5 rounded-full bg-[#ff5b2e]"></span>
+    <span class="pill-stack"><span class="pill-text">${label}</span><span class="pill-text pill-text-hover" aria-hidden="true">${label}</span></span>
+</a>`;
 const input = 'w-full rounded-lg border border-line bg-white/[.03] px-3.5 py-3 text-base text-ink outline-none transition focus:border-red-bright focus:bg-white/[.05]';
 
 document.title = [site.name, site.role].filter(Boolean).join(' — ');
 
 document.querySelector('#app').innerHTML = `
-<header class="fixed inset-x-0 top-0 z-40 h-16 flex items-center justify-between px-5 sm:px-10 border-b border-line bg-bg/80 backdrop-blur-md">
-    <a href="#top" class="text-lg font-bold tracking-tight">${esc(site.name)}</a>
-    <nav class="flex gap-6 sm:gap-8 text-[15px]">
-        <a href="#darbai" class="${navLink}" data-nav>Darbai</a>
-        <a href="#apie" class="${navLink}" data-nav>Apie mane</a>
-        <a href="#kontaktai" class="${navLink}" data-nav>Kontaktai</a>
+<header class="pointer-events-none fixed inset-x-0 top-0 z-40 flex items-center justify-between px-4 pt-4 sm:px-6 xl:px-10 [&>*]:pointer-events-auto">
+    <a href="#top" class="flex items-center gap-3">
+        <span class="grid size-10 place-items-center rounded-full border border-white/15 bg-[rgba(18,18,20,.62)] text-[13px] font-semibold tracking-tight backdrop-blur-xl">${esc(site.name.split(/\s+/).map((w) => w[0]).join(''))}</span>
+        <span class="hidden text-sm font-semibold tracking-tight sm:block">${esc(site.name)}</span>
+    </a>
+    <nav class="flex items-center gap-[2px] rounded-full border border-white/10 bg-[rgba(18,18,20,.62)] p-[3px] backdrop-blur-xl">
+        ${navLink('#darbai', 'Darbai')}
+        ${navLink('#apie', 'Apie mane')}
+        ${navLink('#kontaktai', 'Kontaktai')}
     </nav>
 </header>
 
 <main>
-    <section id="top" class="${panel} justify-center">
-        <div class="mx-auto w-full max-w-6xl">
-            ${site.intro ? `
-            <p class="mb-5 text-lg font-medium text-muted">${esc([site.name, site.role].filter(Boolean).join(' · '))}</p>
-            <h1 class="max-w-6xl text-[clamp(40px,6.5vw,92px)] font-extrabold leading-[1.02] tracking-tighter">${esc(site.intro)}</h1>` : `
-            <h1 class="text-[clamp(52px,10vw,140px)] font-extrabold leading-none tracking-tighter">${esc(site.name)}</h1>
-            ${when(site.role, `<p class="mt-5 text-[clamp(18px,2vw,24px)] text-muted">${esc(site.role)}</p>`)}`}
-            <div class="mt-10 flex flex-wrap gap-3">
-                <a href="#darbai" class="rounded-full bg-red px-7 py-3.5 font-semibold text-white hover:bg-red-bright transition-colors">Mano darbai</a>
-                <a href="#kontaktai" class="rounded-full border border-line px-7 py-3.5 font-semibold text-ink hover:border-red-bright transition-colors">Susisiekti</a>
+    <section id="top" class="relative isolate flex min-h-svh snap-start flex-col overflow-hidden pt-28">
+        <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_75%_10%,rgba(255,91,46,.13),transparent_70%),radial-gradient(50%_40%_at_10%_90%,rgba(243,240,234,.05),transparent_70%)]"></div>
+        <canvas id="hero-dots" aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 size-full opacity-70 [mask-image:linear-gradient(to_bottom,#000_55%,transparent)]"></canvas>
+        <div class="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-end px-5 pb-10 sm:px-10">
+            <div>
+                <h1 class="text-[clamp(52px,10vw,150px)] font-semibold leading-[.92] tracking-[-.045em]">${esc(site.name)}</h1>
+                ${when(site.intro || site.role, `<p class="hero-shine mt-6 max-w-4xl text-[clamp(24px,3.4vw,48px)] font-medium leading-[1.1] tracking-tight">${esc(site.intro || site.role)}</p>`)}
+                <div class="mt-10 flex flex-wrap items-center gap-3">
+                    <a href="#darbai" class="group inline-flex items-center gap-2 rounded-full bg-[#cc3a0e] px-6 py-3 font-semibold text-white hover:bg-[#e04516] transition-colors">Mano darbai <span class="transition-transform group-hover:translate-x-0.5">→</span></a>
+                    <a href="#kontaktai" class="rounded-full border border-white/15 px-6 py-3 font-semibold text-white hover:border-white/40 transition-colors">Susisiekti</a>
+                </div>
             </div>
-            <div class="mt-4 flex gap-3">${socials()}</div>
         </div>
+        ${when(site.about.skills.length, `<div aria-hidden="true" class="overflow-hidden border-t border-white/10 py-3">
+            <div class="marquee font-mono text-sm uppercase tracking-[.12em] text-muted">
+                ${[0, 1, 2, 3].map(() => `<span class="whitespace-nowrap">${site.about.skills.map(esc).join(' &nbsp;·&nbsp; ')} &nbsp;·&nbsp; </span>`).join('')}
+            </div>
+        </div>`)}
     </section>
 
     <section id="darbai" class="${panel} justify-center">
@@ -219,15 +231,13 @@ pop.querySelector('[data-pop-close]').addEventListener('click', closeProject);
 popBackdrop.addEventListener('click', closeProject);
 addEventListener('keydown', (e) => { if (e.key === 'Escape' && !pop.hidden) closeProject(); });
 
-// Underline the header link for the section you're on
+// Orange dot next to the header link for the section you're on
 const navLinks = [...document.querySelectorAll('[data-nav]')];
 const io = new IntersectionObserver((entries) => {
     for (const e of entries) {
         if (!e.isIntersecting) continue;
         navLinks.forEach((a) => {
-            const on = a.getAttribute('href') === `#${e.target.id}`;
-            a.classList.toggle('text-ink', on);
-            a.classList.toggle('border-red-bright', on);
+            a.querySelector('[data-dot]').hidden = a.getAttribute('href') !== `#${e.target.id}`;
         });
     }
 }, { threshold: 0.55 });
@@ -243,3 +253,4 @@ document.getElementById('contact-form').addEventListener('submit', (e) => {
 });
 
 initCursor();
+initDots(document.getElementById('hero-dots'));

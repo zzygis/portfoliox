@@ -4,7 +4,7 @@
 export const site = {
     name: 'Žygimantas Poderis',
     role: '',
-    email: 'you@example.com',
+    email: 'zygimantaspode@gmail.com',
 
     // The big line on the first screen. Leave empty to show your name there instead.
     intro: 'Jaunesnysis web programuotojas, kuriantis švarias svetaines.',

@@ -29,7 +29,56 @@
 .blobs span:nth-child(3) { background: #3a0a10; bottom: -24vmax; left: 20vw; animation-duration: 38s; }
 @keyframes drift { to { transform: translate(8vmax, 6vmax) scale(1.12); } }
 
+/* Hero: orange line with a light sweeping across it */
+.hero-shine {
+    background: linear-gradient(110deg, #ff7b52 0%, #ff7b52 35%, #ffe0d5 50%, #ff7b52 65%, #ff7b52 100%);
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 6s linear infinite;
+}
+@keyframes shine { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+
+/* Hero: skills scrolling along the bottom */
+.marquee { display: flex; width: max-content; animation: marquee 45s linear infinite; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Header links: a light circle grows up from the bottom and the label rolls up */
+.pill {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 36px;
+    padding: 0 14px;
+    overflow: hidden;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -.01em;
+    color: var(--color-ink);
+}
+.pill::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: max(180%, 110px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--color-ink);
+    transform: translate(-50%, 50%) scale(0);
+    transition: transform .45s cubic-bezier(.2, .8, .2, 1);
+}
+.pill:hover::before { transform: translate(-50%, 50%) scale(1); }
+.pill-stack { position: relative; z-index: 1; display: block; line-height: 1; }
+.pill-text { display: block; white-space: nowrap; transition: transform .45s cubic-bezier(.2, .8, .2, 1); }
+.pill-text-hover { position: absolute; inset: 0; color: var(--color-bg); transform: translateY(28px); }
+.pill:hover .pill-text { transform: translateY(-28px); }
+.pill:hover .pill-text-hover { transform: none; }
+.pill:focus-visible { outline: 2px solid #ff5b2e; outline-offset: 2px; }
+
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .blobs span { animation: none; }
+    .blobs span, .hero-shine, .marquee { animation: none; }
 }
