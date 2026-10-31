@@ -195,7 +195,7 @@ const openProject = (block) => {
     document.getElementById('pop-title').textContent = p.title;
     const icon = document.getElementById('pop-icon');
     icon.hidden = !p.icon;
-    icon.querySelector('img').src = p.icon || '';
+    icon.querySelector('img').src = p.icon ? import.meta.env.BASE_URL + p.icon.replace(/^\//, '') : '';
     document.getElementById('pop-tech').innerHTML = pills(p.tech);
     const desc = document.getElementById('pop-desc');
     desc.textContent = p.description;
