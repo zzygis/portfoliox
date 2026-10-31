@@ -42,11 +42,11 @@ export const site = {
     // tech: what you built it with, e.g. ['HTML', 'Tailwind', 'JavaScript']
     projects: [
         { title: 'besha.bg', icon: '/img/besha.svg', tech: ['PHP', 'Twig', 'Tailwind', 'Docker'], description: 'Besha yra laikrodžių įmonės svetainė. Sukurta praktikos metu įmonėje ThinkWeb, Bulgarijoje, naudojant įmonės ThinkCMS sistemą.', url: 'https://www.besha.bg/' },
-        { title: 'chativly.xyz', icon: '/img/chativly.png', tech: ['HTML', 'CSS', 'JavaScript', 'PHP', 'Netlify', 'Claude API'], description: 'Chativly kuria svetaines vietiniam verslui Lietuvoje ir prie jų gali pridėti DI chatbotą, kuris atsako klientams 24/7.', url: 'https://chativly.xyz/', repo: 'https://github.com/gtprodlmax34/chativly' },
-        { title: 'Valorant LFG botas', tech: ['Python', 'PyAutoGUI','Tkinter'], description: 'Programa, kuri skaito Discord langą ir automatiškai paspaudžia LFG mygtukus keliuose kanaluose. GUI kuriama dabar.', url: '', repo: 'https://github.com/gtprodlmax34/Bot-for-val-discord' },
+        { title: 'chativly.xyz', icon: '/img/chativly.png', tech: ['HTML', 'CSS', 'JavaScript', 'PHP', 'Netlify', 'Claude API'], description: 'Chativly kuria svetaines vietiniam verslui Lietuvoje ir prie jų gali pridėti DI chatbotą, kuris atsako klientams 24/7.', url: 'https://chativly.xyz/', repo: 'https://github.com/zzygis/chativly' },
+        { title: 'Valorant LFG botas', tech: ['Python', 'PyAutoGUI','Tkinter'], description: 'Programa, kuri skaito Discord langą ir automatiškai paspaudžia LFG mygtukus keliuose kanaluose. GUI kuriama dabar.', url: '', repo: 'https://github.com/zzygis/Bot-for-val-discord' },
     ],
 
     // Swap in your own profile links
-    github: 'https://github.com/gtprodlmax34',
+    github: 'https://github.com/zzygis',
     linkedin: 'https://www.linkedin.com/in/%C5%BEygimantas-poderis-a06853329/',
 };
